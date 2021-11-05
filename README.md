@@ -5,7 +5,7 @@ Juego de Tatetí desarrollado para la materia Introducción a la Programación (
 
 Materia: Introducción a la Programación (FAI)
 Carrera: Tecnicatura Universitaria en Desarrollo Web
-Equipo de Cátedra: María José Rotter (mariajoserotter@fi.uncoma.edu.ar), Karina Rozas, David Torchinsky, Sandra Lucero
+Equipo de Cátedra: María José Rotter, Karina Rozas, David Torchinsky, Sandra Lucero
 
 # Integrantes del equipo
 
