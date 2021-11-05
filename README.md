@@ -9,5 +9,5 @@ Equipo de Cátedra: María José Rotter (mariajoserotter@fi.uncoma.edu.ar), Kari
 
 # Integrantes del equipo
 
--  **Stefano Zuccato** - legajo 3517 - mail: stefano.zuccato@est.fi.uncoma.edu.ar - usuario github: zuccato3517
--  **Valeria Aylin Travnik Armitano**  - legajo 3522 - mail: valeria.travnik@est.fi.uncoma.edu.ar - usuario github: AylinTravnik
+-  **Stefano Zuccato** - legajo n° 3517 - mail: stefano.zuccato@est.fi.uncoma.edu.ar - usuario github: zuccato3517
+-  **Valeria Aylin Travnik Armitano**  - legajo n° 3522 - mail: valeria.travnik@est.fi.uncoma.edu.ar - usuario github: AylinTravnik
