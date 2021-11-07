@@ -35,19 +35,56 @@ for ($numeroJuego=0; $numeroJuego<$cantidadJuegos; $numeroJuego++) {
     $juegos[$numeroJuego]["Ptos O"] = trim(fgets(STDIN));
 }
 };
- 
-/*
-for ($numeroJuego=0; $numeroJuego<$cantidadJuegos; $numeroJuego++) {
-    echo $juegos[$numeroJuego]["ganador"];
-    echo $juegos[$numeroJuego]["perdedor"];
-    echo $juegos[$numeroJuego]["puntaje"];
+
+
+
+function seleccionarOpcion () {
+   echo  "1) Jugar al tateti \n";
+   echo  "2) Mostrar un juego \n ";
+   echo  "3) Mostrar el primer juego ganador \n";
+   echo  "4) Mostrar porcentaje de Juegos ganados \n";
+   echo  "5) Mostrar resumen de Jugador \n";
+   echo  "6) Mostrar listado de juegos Ordenado por jugador O \n";
+   echo  "7) salir \n";
+   echo  "Seleccione una opcion del menu: \n";
+   $minimo = 1 ;
+   $maximo = 7 ; 
+   $opcionSeleccionada = solicitarNumeroEntre($minimo, $maximo);
+   return $opcionSeleccionada;
 };
+ 
+
+function primerJuegoGanado ($vaATenerQueSerJuegos, $vaATenerQueSerUnNombre){
+$largoArreglo = count ($vaATenerQueSerJuegos);
+$posicionArreglo = 0;
+while ($posicionArreglo <= $largoArreglo /*&& $vaATenerQueSerUnNombre <>$comosellamelavariable && $meterotracondcion*/  ) {
+    $posicionArreglo= $posicionArreglo +1; 
+}
+
+}
 
 
-*/
+function elijaSimbolo () {
+    $simboloElegido= "";
+    echo "seleccione un Simbolo para jugar (X-O)";
+    $simboloElegido = trim(fgets(STDIN));
+    while ($simboloElegido <> "X" || $simboloElegido<> "O"){
+        strtoupper($simboloElegido);
+        if ($simboloElegido == 0){
+           $simboloElegido = "O";}
+         elseif ($simboloElegido == "O" ){
+           return $simboloElegido;}
+        elseif ($simboloElegido == "X")  {
+           return $simboloElegido;}
+        else {
+          echo "Por favor seleccione un Simbolo correcto: " ;};
+    
 
 
+        };
+}
 
+elijaSimbolo();
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
