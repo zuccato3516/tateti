@@ -15,25 +15,24 @@ include_once("tateti.php");
 /**************************************/
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
- function cargarJuegos(){
+$juegos = array();
 
- $juegos = array();
+function cargarJuegos(){
 
 echo "Elija la cantidad de juegos que desea ingresar: ";
 $cantidadJuegos = trim(fgets(STDIN));
 
 for ($numeroJuego=0; $numeroJuego<$cantidadJuegos; $numeroJuego++) {
-    echo "¿Que jugador jugo con X?";
-    $juegos[$numeroJuego]["X"] = trim(fgets(STDIN));
-    echo "¿Que jugador jugo con O?";
-    $juegos[$numeroJuego]["O"] = trim(fgets(STDIN));
-    echo "¿Como concluyo el juego? (Ganador/Empate)";
-    $juegos[$numeroJuego]["resultado"] = trim(fgets(STDIN));
-    echo "¿que puntaje obtuvo X?";
-    $juegos[$numeroJuego]["Ptos X"] = trim(fgets(STDIN));
-    echo "¿que puntaje obtuvo O?";
-    $juegos[$numeroJuego]["Ptos O"] = trim(fgets(STDIN));
-}
+   echo "¿Que jugador jugo con X?";
+   $juegosActuales[$numeroJuego]["X"] = trim(fgets(STDIN));
+   echo "¿Que jugador jugo con O?";
+   $juegosActuales[$numeroJuego]["O"] = trim(fgets(STDIN));
+   echo "¿Como concluyo el juego? (Ganador/Empate)";
+   $juegosActuales[$numeroJuego]["resultado"] = trim(fgets(STDIN));
+   echo "¿que puntaje obtuvo X?";
+   $juegosActuales[$numeroJuego]["Ptos X"] = trim(fgets(STDIN));
+   echo "¿que puntaje obtuvo O?";
+   $juegosActuales[$numeroJuego]["Ptos O"] = trim(fgets(STDIN));
 };
 
 
@@ -82,8 +81,8 @@ function elijaSimbolo () {
 
 
         };
-}
-
+};
+};
 elijaSimbolo();
 
 /**************************************/
