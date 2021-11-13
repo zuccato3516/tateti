@@ -15,7 +15,7 @@ include_once("tateti.php");
 /**************************************/
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
-$juegos = array();
+
 
 function cargarJuegos(){
 
@@ -53,47 +53,100 @@ function seleccionarOpcion () {
 };
  
 
-function primerJuegoGanado ($vaATenerQueSerJuegos, $vaATenerQueSerUnNombre){
-$largoArreglo = count ($vaATenerQueSerJuegos);
+function primerJuegoGanado ($arregloJuegos, $ganadorBuscado){
+$largoArreglo = count ($arregloJuegos);
 $posicionArreglo = 0;
-while ($posicionArreglo <= $largoArreglo /*&& $vaATenerQueSerUnNombre <>$comosellamelavariable && $meterotracondcion*/  ) {
-    $posicionArreglo= $posicionArreglo +1; 
-}
+$ganadorPartida = "";
 
-}
+if ($ganadorBuscado == $arregloJuegos[$posicionArreglo]["X"] && ($arregloJuegos[$posicionArreglo]["Puntos X"] > $arregloJuegos[$posicionArreglo]["Puntos Y"])) {
+    $ganadorPartida = $arregloJuegos[$posicionArreglo]["X"];
+} elseif ($ganadorBuscado == $arregloJuegos[$posicionArreglo]["Y"] && ($arregloJuegos[$posicionArreglo]["Puntos Y"] > $arregloJuegos[$posicionArreglo]["Puntos X"])) {
+    $ganadorPartida = $arregloJuegos[$posicionArreglo]["Y"];
+};
+
+while ($posicionArreglo < $largoArreglo && $ganadorBuscado <> $ganadorPartida) {
+    $posicionArreglo= $posicionArreglo +1; 
+};
+
+return $arregloJuegos[$posicionArreglo];
+
+};
 
 
 function elijaSimbolo () {
     $simboloElegido= "";
     echo "seleccione un Simbolo para jugar (X-O)";
-    $simboloElegido = trim(fgets(STDIN));
-    while ($simboloElegido <> "X" || $simboloElegido<> "O"){
-        strtoupper($simboloElegido);
+    $simboloElegido = strtoupper(trim(fgets(STDIN)));
         if ($simboloElegido == 0){
            $simboloElegido = "O";}
-         elseif ($simboloElegido == "O" ){
-           return $simboloElegido;}
-        elseif ($simboloElegido == "X")  {
-           return $simboloElegido;}
         else {
           echo "Por favor seleccione un Simbolo correcto: " ;};
-    
-
-
         };
 };
-};
-elijaSimbolo();
+
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
 
 //Declaración de variables:
-
+$juegos = array();
 
 //Inicialización de variables:
+$juegos[0]["jugadorCruz"] = "Juan";
+$juegos[0]["jugadorCirculo"] = "Luis";
+$juegos[0]["puntosCruz"] = 5;
+$juegos[0]["puntosCirculo"] = 0;
 
+$juegos[1]["jugadorCruz"] = "Luis";
+$juegos[1]["jugadorCirculo"] = "Maria";
+$juegos[1]["puntosCruz"] = 1;
+$juegos[1]["puntosCirculo"] = 1;
+
+$juegos[2]["jugadorCruz"] = "Ana";
+$juegos[2]["jugadorCirculo"] = "Juan";
+$juegos[2]["puntosCruz"] = 3;
+$juegos[2]["puntosCirculo"] = 0;
+
+$juegos[3]["jugadorCruz"] = "Juan";
+$juegos[3]["jugadorCirculo"] = "Maria";
+$juegos[3]["puntosCruz"] = 0;
+$juegos[3]["puntosCirculo"] = 4;
+
+$juegos[4]["jugadorCruz"] = "Maria";
+$juegos[4]["jugadorCirculo"] = "Luis";
+$juegos[4]["puntosCruz"] = 3;
+$juegos[4]["puntosCirculo"] = 0;
+
+$juegos[5]["jugadorCruz"] = "Luis";
+$juegos[5]["jugadorCirculo"] = "Ana";
+$juegos[5]["puntosCruz"] = 3;
+$juegos[5]["puntosCirculo"] = 0;
+
+$juegos[6]["jugadorCruz"] = "Juan";
+$juegos[6]["jugadorCirculo"] = "Luis";
+$juegos[6]["puntosCruz"] = 1;
+$juegos[6]["puntosCirculo"] = 1;
+
+$juegos[7]["jugadorCruz"] = "Ana";
+$juegos[7]["jugadorCirculo"] = "Maria";
+$juegos[7]["puntosCruz"] = 0;
+$juegos[7]["puntosCirculo"] = 5;
+
+$juegos[8]["jugadorCruz"] = "Juan";
+$juegos[8]["jugadorCirculo"] = "Luis";
+$juegos[8]["puntosCruz"] = 5;
+$juegos[8]["puntosCirculo"] = 0;
+
+$juegos[9]["jugadorCruz"] = "Maria";
+$juegos[9]["jugadorCirculo"] = "Juan";
+$juegos[9]["puntosCruz"] = 3;
+$juegos[9]["puntosCirculo"] = 0;
+
+$juegos[10]["jugadorCruz"] = "Maria";
+$juegos[10]["jugadorCirculo"] = "Ana";
+$juegos[10]["puntosCruz"] = 3;
+$juegos[10]["puntosCirculo"] = 0;
 
 //Proceso:
 
