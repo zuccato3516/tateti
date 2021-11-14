@@ -44,37 +44,21 @@ function seleccionarOpcion () {
    return $opcionSeleccionada;
 };
 
-
-
-
-function primerJuegoGanados ($arregloJuegos, $ganadorBuscado){
-$largoArreglo = count ($arregloJuegos);
-$posicionArreglo = 0;
-$ganadorPartida = "";
-
-if ($ganadorBuscado == $arregloJuegos[$posicionArreglo]["X"] && ($arregloJuegos[$posicionArreglo]["Puntos X"] > $arregloJuegos[$posicionArreglo]["Puntos Y"])) {
-    $ganadorPartida = $arregloJuegos[$posicionArreglo]["X"];
-} elseif ($ganadorBuscado == $arregloJuegos[$posicionArreglo]["Y"] && ($arregloJuegos[$posicionArreglo]["Puntos Y"] > $arregloJuegos[$posicionArreglo]["Puntos X"])) {
-    $ganadorPartida = $arregloJuegos[$posicionArreglo]["Y"];
-};
-
-while ($posicionArreglo < $largoArreglo && $ganadorBuscado <> $ganadorPartida) {
-    $posicionArreglo= $posicionArreglo +1; 
-};
-
-return $arregloJuegos[$posicionArreglo];
-
-};
-
-
 function primerJuegoGanado(&$arregloJuegos, $ganadorBuscado) {
     $ganadorEncontrado = FALSE;
     $i = 0;
     while ($ganadorEncontrado == FALSE) {
         if ($arregloJuegos[$i]["puntosCruz">"puntosCirculo"]) {
-
-        }
-    }
+            $ganadorEncontrado = "jugadorCruz";
+        } elseif ($arregloJuegos[$i]["puntosCruz"<"puntosCirculo"]) {
+            $ganadorEncontrado = "jugadorCirculo";
+        };
+        $i = $i + 1;
+    };
+    if ($ganadorEncontrado == FALSE) {
+        $ganadorEncontrado = -1;
+    };
+    return $ganadorEncontrado;
 }
 
 function elijaSimbolo () {
