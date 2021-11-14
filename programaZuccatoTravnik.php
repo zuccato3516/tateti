@@ -48,7 +48,14 @@ function primerJuegoGanado(&$arregloJuegos, $ganadorBuscado) {
     $ganadorEncontrado = FALSE;
     $i = 0;
     while ($ganadorEncontrado == FALSE) {
-        if ($arregloJuegos[$i]["puntosCruz">"puntosCirculo"]) {
+        if (($arregloJuegos[$i]["jugadorCruz"] = $ganadorBuscado && $arregloJuegos[$i]["puntosCruz">"puntosCirculo"])||($arregloJuegos[$i]["jugadorCirculo"] = $ganadorBuscado && $arregloJuegos[$i]["puntosCirculo">"puntosCruz"])){
+            return $i;
+        };
+        $i = $i +1;
+    };
+
+
+        if () {
             $ganadorEncontrado = "jugadorCruz";
         } elseif ($arregloJuegos[$i]["puntosCruz"<"puntosCirculo"]) {
             $ganadorEncontrado = "jugadorCirculo";
