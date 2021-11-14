@@ -88,9 +88,16 @@ function elijaSimbolo () {
         echo "Jugador X:". $juegos[$juegoNumero]["jugadorCruz"] ."obtuvo". $juegos[$juegoNumero]["puntosCruz"]. "puntos\n";
         echo "Jugador 0:". $juegos[$juegoNumero]["jugadorCirculo"]. "obtuvo". $juegos[$juegoNumero]["puntosCirculo"]. "puntos\n";
 
-    }
+    };
 
-
+    function juegosGanadosTotales ($juegosGanadosAContar){
+        $totalDeJuegos = count ($juegosGanadosAContar);
+        $posicionEnArreglo = 0;
+        $cantJuegosGanados = 0;
+        
+        if ($ganadorBuscado == $arregloJuegos[$posicionArreglo]["X"] && ($arregloJuegos[$posicionArreglo]["Puntos X"] > $arregloJuegos[$posicionArreglo]["Puntos Y"])) {
+            $ganadorPartida = $arregloJuegos[$posicionArreglo]["X"];
+    };
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -123,23 +130,38 @@ $historialJuegos = cargarJuegos();
 $menu = seleccionarOpcion();
 
 switch ($opcionSeleccionada) {
-  case 1:
-      $juego = jugar();
-      //add all data to array
-      //via function agregarJuego/
-      break;
-  case 2:
-      echo "Seleccione el N° de juego que desea visualizar: ";
-      $juegoAVisualizar =trim(fgets(STDIN));
-      visualizarUnJuego($juegoAVisualizar); 
-      break;
-  case 3:
-      echo "Ingrese el nombre de un Jugador para ver su primer juego ganado:";
-      $primerJuegoDeJugador =trim(fgets(STDIN));
-      primerJuegoGanado ($primerJuegoDeJugador);
-      break;
-
-}; 
-//imprimirResultado($juego);
-
-
+    case 1:
+        $juego = jugar();
+        //add all data to array
+        //via function agregarJuego/
+        break;
+    case 2:
+        echo "Seleccione el N° de juego que desea visualizar: ";
+        $juegoAVisualizar =trim(fgets(STDIN));
+        visualizarUnJuego($juegoAVisualizar); 
+        break;
+    case 3:
+        echo "Ingrese el nombre de un Jugador para ver su primer juego ganado:";
+        $primerJuegoDeJugador =trim(fgets(STDIN));
+        primerJuegoGanado ($primerJuegoDeJugador);
+        break;
+    case 4: 
+          //Mostrar porcentaje de juegos ganados
+          // son dos funciones, una para det total juegos ganados y otra total ganados segun X o O
+         
+          break;
+    case 5:
+          //Mostrar Resumen Jugador
+          break;
+    case 6:
+          //mostrar listado de juegos ordenado por jugador O
+          // con UASORT Y PRINT_R
+           break;  
+    case 7: 
+          // salir
+           break;
+  
+    
+        
+        
+  };
