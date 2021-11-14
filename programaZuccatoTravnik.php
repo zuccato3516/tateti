@@ -75,8 +75,14 @@ return $arregloJuegos[$posicionArreglo];
 };
 */
 
-function primerJuegoGanado($arregloJuegos, $ganadorBuscado) {
+function primerJuegoGanado(&$arregloJuegos, $ganadorBuscado) {
+    $ganadorEncontrado = FALSE;
+    $i = 0;
+    while ($ganadorEncontrado == FALSE) {
+        if ($arregloJuegos[$i]["puntosCruz">"puntosCirculo"]) {
 
+        }
+    }
 }
 
 function elijaSimbolo () {
@@ -137,7 +143,11 @@ cargarJuegos($juegos,"Maria","Ana",3,0);
 //Proceso:
 
 $juego = jugar();
-//print_r($juego);
+
+cargarJuegos($juegos,$juego["jugadorCruz"],$juego["jugadorCirculo"],$juego["puntosCruz"],$juego["puntosCirculo"]);
+
+print_r($juegos);
+
 //imprimirResultado($juego);
 
 
