@@ -16,6 +16,16 @@ include_once("tateti.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
+function cargarJuegos(&$arregloJuegos, $jugador1,$jugador2,$puntaje1,$puntaje2) {
+    $i = count($arregloJuegos);
+    $arregloJuegos[($i)]["jugadorCruz"] = $jugador1;
+    $arregloJuegos[($i)]["jugadorCirculo"] = $jugador2;
+    $arregloJuegos[($i)]["puntosCruz"] = $puntaje1;
+    $arregloJuegos[($i)]["puntosCirculo"] = $puntaje2;
+
+    return $arregloJuegos;
+};
+
 /*
 function cargarJuegos(){
 
@@ -89,11 +99,16 @@ function elijaSimbolo () {
     $simboloElegido= "";
     echo "seleccione un Simbolo para jugar (X-O)";
     $simboloElegido = strtoupper(trim(fgets(STDIN)));
+    while ($simboloElegido <> "X" ||"O"){
+    
         if ($simboloElegido == 0){
            $simboloElegido = "O";}
         else {
           echo "Por favor seleccione un Simbolo correcto: " ;};
+          $simboloElegido = strtoupper(trim(fgets(STDIN)));
         };
+    };
+
 
     function visualizarUnJuego ($juegoNumero){
     $statusJuego = "";
@@ -117,15 +132,7 @@ function elijaSimbolo () {
 //Declaración de variables:
 $juegos = array();
 
-function cargarJuegos(&$arregloJuegos, $jugador1,$jugador2,$puntaje1,$puntaje2) {
-    $i = count($arregloJuegos);
-    $arregloJuegos[($i)]["jugadorCruz"] = $jugador1;
-    $arregloJuegos[($i)]["jugadorCirculo"] = $jugador2;
-    $arregloJuegos[($i)]["puntosCruz"] = $puntaje1;
-    $arregloJuegos[($i)]["puntosCirculo"] = $puntaje2;
 
-    return $arregloJuegos;
-};
 
 //Inicialización de variables:
 cargarJuegos($juegos,"Juan","Luis",5,0);
@@ -148,6 +155,30 @@ cargarJuegos($juegos,$juego["jugadorCruz"],$juego["jugadorCirculo"],$juego["punt
 
 print_r($juegos);
 
+
+$historialJuegos = cargarJuegos();
+
+$menu = seleccionarOpcion();
+
+switch ($opcionSeleccionada) {
+  case 1:
+      $juego = jugar();
+      //add all data to array
+      //via function agregarJuego/
+      break;
+  case 2:
+      echo "Seleccione el N° de juego que desea visualizar: ";
+      $juegoAVisualizar =trim(fgets(STDIN));
+      visualizarUnJuego($juegoAVisualizar); 
+      break;
+  case 3:
+      echo "Ingrese el nombre de un Jugador para ver su primer juego ganado:";
+      $primerJuegoDeJugador =trim(fgets(STDIN));
+      primerJuegoGanado ($primerJuegoDeJugador);
+
+     
+      break;
+}; 
 //imprimirResultado($juego);
 
 
