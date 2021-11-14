@@ -129,6 +129,19 @@ function elijaSimbolo () {
         };
     }
 
+    function visualizarUnJuego ($juegoNumero){
+    $statusJuego = "";
+        if ($juegos[$juegoNumero]["puntosCruz"] = 1)
+           $statusJuego == "empate";
+        elseif ( $juegos[$juegoNumero]["puntosCruz"] > $juegos[$juegoNumero]["puntosCirculo"] )
+           $statusJuego == "gano X";
+        else 
+           $statusJuego == "gano O";
+        echo "Juego TATETI:." .$juegoNumero."(".$statusJuego. ")". "\n";
+        echo "Jugador X:". $juegos[$juegoNumero]["jugadorCruz"] ."obtuvo". $juegos[$juegoNumero]["puntosCruz"]. "puntos\n";
+        echo "Jugador 0:". $juegos[$juegoNumero]["jugadorCirculo"]. "obtuvo". $juegos[$juegoNumero]["puntosCirculo"]. "puntos\n";
+
+    }
 
 
 /**************************************/
@@ -164,10 +177,7 @@ echo "El historial de partidos esta vacio, inicie un historial:";
     case 2:
         echo "Seleccione el N° de juego que desea visualizar: ";
         $juegoAVisualizar =trim(fgets(STDIN));
-       // $juegos[$juegoAVisualizar];/
-        echo "Juego TATETI:." .$juegoAVisualizar.  "($juegos[$juegoAVisualizar] [)". "\n";
-        echo "Jugador X: <nombre> obtuvo <puntaje> puntos\n";
-        echo "Jugador 0: <nombre> obtuvo <puntaje> puntos\n";
+        visualizarUnJuego($juegoAVisualizar); 
         break;
     case 3:
         echo "i es igual a 2";
