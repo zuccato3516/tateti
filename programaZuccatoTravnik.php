@@ -16,65 +16,25 @@ include_once("tateti.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
+/*
 function cargarJuegos(){
-    $juegos = array();
-    $juegos[0]["jugadorCruz"] = "Juan";
-$juegos[0]["jugadorCirculo"] = "Luis";
-$juegos[0]["puntosCruz"] = 5;
-$juegos[0]["puntosCirculo"] = 0;
 
-$juegos[1]["jugadorCruz"] = "Luis";
-$juegos[1]["jugadorCirculo"] = "Maria";
-$juegos[1]["puntosCruz"] = 1;
-$juegos[1]["puntosCirculo"] = 1;
+echo "Elija la cantidad de juegos que desea ingresar: ";
+$cantidadJuegos = trim(fgets(STDIN));
 
-$juegos[2]["jugadorCruz"] = "Ana";
-$juegos[2]["jugadorCirculo"] = "Juan";
-$juegos[2]["puntosCruz"] = 3;
-$juegos[2]["puntosCirculo"] = 0;
-
-$juegos[3]["jugadorCruz"] = "Juan";
-$juegos[3]["jugadorCirculo"] = "Maria";
-$juegos[3]["puntosCruz"] = 0;
-$juegos[3]["puntosCirculo"] = 4;
-
-$juegos[4]["jugadorCruz"] = "Maria";
-$juegos[4]["jugadorCirculo"] = "Luis";
-$juegos[4]["puntosCruz"] = 3;
-$juegos[4]["puntosCirculo"] = 0;
-
-$juegos[5]["jugadorCruz"] = "Luis";
-$juegos[5]["jugadorCirculo"] = "Ana";
-$juegos[5]["puntosCruz"] = 3;
-$juegos[5]["puntosCirculo"] = 0;
-
-$juegos[6]["jugadorCruz"] = "Juan";
-$juegos[6]["jugadorCirculo"] = "Luis";
-$juegos[6]["puntosCruz"] = 1;
-$juegos[6]["puntosCirculo"] = 1;
-
-$juegos[7]["jugadorCruz"] = "Ana";
-$juegos[7]["jugadorCirculo"] = "Maria";
-$juegos[7]["puntosCruz"] = 0;
-$juegos[7]["puntosCirculo"] = 5;
-
-$juegos[8]["jugadorCruz"] = "Juan";
-$juegos[8]["jugadorCirculo"] = "Luis";
-$juegos[8]["puntosCruz"] = 5;
-$juegos[8]["puntosCirculo"] = 0;
-
-$juegos[9]["jugadorCruz"] = "Maria";
-$juegos[9]["jugadorCirculo"] = "Juan";
-$juegos[9]["puntosCruz"] = 3;
-$juegos[9]["puntosCirculo"] = 0;
-
-$juegos[10]["jugadorCruz"] = "Maria";
-$juegos[10]["jugadorCirculo"] = "Ana";
-$juegos[10]["puntosCruz"] = 3;
-$juegos[10]["puntosCirculo"] = 0;
-
-return $juegos; 
-}
+for ($numeroJuego=0; $numeroJuego<$cantidadJuegos; $numeroJuego++) {
+   echo "¿Que jugador jugo con X?";
+   $juegosActuales[$numeroJuego]["X"] = trim(fgets(STDIN));
+   echo "¿Que jugador jugo con O?";
+   $juegosActuales[$numeroJuego]["O"] = trim(fgets(STDIN));
+   echo "¿Como concluyo el juego? (Ganador/Empate)";
+   $juegosActuales[$numeroJuego]["resultado"] = trim(fgets(STDIN));
+   echo "¿que puntaje obtuvo X?";
+   $juegosActuales[$numeroJuego]["Ptos X"] = trim(fgets(STDIN));
+   echo "¿que puntaje obtuvo O?";
+   $juegosActuales[$numeroJuego]["Ptos O"] = trim(fgets(STDIN));
+};
+*/
 
 /*
 function seleccionarOpcion () {
@@ -115,19 +75,19 @@ return $arregloJuegos[$posicionArreglo];
 };
 */
 
+function primerJuegoGanado($arregloJuegos, $ganadorBuscado) {
+    
+}
+
 function elijaSimbolo () {
     $simboloElegido= "";
     echo "seleccione un Simbolo para jugar (X-O)";
     $simboloElegido = strtoupper(trim(fgets(STDIN)));
-    while ($simboloElegido <> "X" ||"O"){
-    
         if ($simboloElegido == 0){
            $simboloElegido = "O";}
         else {
           echo "Por favor seleccione un Simbolo correcto: " ;};
-          $simboloElegido = strtoupper(trim(fgets(STDIN)));
         };
-    }
 
 
 
@@ -136,21 +96,40 @@ function elijaSimbolo () {
 /**************************************/
 
 //Declaración de variables:
+$juegos = array();
 
+function cargarJuegos(&$arregloJuegos, $jugador1,$jugador2,$puntaje1,$puntaje2) {
+    $i = count($arregloJuegos);
+    $arregloJuegos[($i)]["jugadorCruz"] = $jugador1;
+    $arregloJuegos[($i)]["jugadorCirculo"] = $jugador2;
+    $arregloJuegos[($i)]["puntosCruz"] = $puntaje1;
+    $arregloJuegos[($i)]["puntosCirculo"] = $puntaje2;
+
+    return $arregloJuegos;
+};
 
 //Inicialización de variables:
+cargarJuegos($juegos,"Juan","Luis",5,0);
+cargarJuegos($juegos,"Luis","Maria",1,1);
+cargarJuegos($juegos,"Ana","Juan",3,0);
+cargarJuegos($juegos,"Juan","Maria",0,4);
+cargarJuegos($juegos,"Maria","Luis",3,0);
+cargarJuegos($juegos,"Luis","Ana",3,0);
+cargarJuegos($juegos,"Juan","Luis",1,1);
+cargarJuegos($juegos,"Ana","Maria",0,5);
+cargarJuegos($juegos,"Juan","Luis",5,0);
+cargarJuegos($juegos,"Maria","Juan",3,0);
+cargarJuegos($juegos,"Maria","Ana",3,0);
 
 //Proceso:
 
-
-
-
+$juego = jugar();
 //print_r($juego);
 //imprimirResultado($juego);
 
 
 
-Proceso:
+/*Proceso:
 echo "El historial de partidos esta vacio, inicie un historial:";
   $historialJuegos = cargarJuegos();
 
@@ -159,12 +138,12 @@ echo "El historial de partidos esta vacio, inicie un historial:";
   switch ($opcionSeleccionada) {
     case 1:
         $juego = jugar();
-        //add all data to array/
+        /add all data to array/
         break;
     case 2:
         echo "Seleccione el N° de juego que desea visualizar: ";
         $juegoAVisualizar =trim(fgets(STDIN));
-       // $juegos[$juegoAVisualizar];/
+       / $juegos[$juegoAVisualizar];/
         echo "Juego TATETI:." .$juegoAVisualizar.  "($juegos[$juegoAVisualizar] [)". "\n";
         echo "Jugador X: <nombre> obtuvo <puntaje> puntos\n";
         echo "Jugador 0: <nombre> obtuvo <puntaje> puntos\n";
@@ -172,4 +151,4 @@ echo "El historial de partidos esta vacio, inicie un historial:";
     case 3:
         echo "i es igual a 2";
         break;
-}; 
+}; */
