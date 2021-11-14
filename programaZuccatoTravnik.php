@@ -156,26 +156,26 @@ $juego = jugar();
 
 
 
-/*
-do {
-    $opcion = ...;
+/*Proceso:
+echo "El historial de partidos esta vacio, inicie un historial:";
+  $historialJuegos = cargarJuegos();
 
-    
-    switch ($opcion) {
-        case 1: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
-
-            break;
-        case 2: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
-
-            break;
-        case 3: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-
-            break;
-        
-            //...
-    }
-} while ($opcion != X);
-*/
+  $menu = seleccionarOpcion();
+  
+  switch ($opcionSeleccionada) {
+    case 1:
+        $juego = jugar();
+        /add all data to array/
+        break;
+    case 2:
+        echo "Seleccione el N° de juego que desea visualizar: ";
+        $juegoAVisualizar =trim(fgets(STDIN));
+       / $juegos[$juegoAVisualizar];/
+        echo "Juego TATETI:." .$juegoAVisualizar.  "($juegos[$juegoAVisualizar] [)". "\n";
+        echo "Jugador X: <nombre> obtuvo <puntaje> puntos\n";
+        echo "Jugador 0: <nombre> obtuvo <puntaje> puntos\n";
+        break;
+    case 3:
+        echo "i es igual a 2";
+        break;
+}; */
