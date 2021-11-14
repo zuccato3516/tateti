@@ -16,7 +16,7 @@ include_once("tateti.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
-
+/*
 function cargarJuegos(){
 
 echo "Elija la cantidad de juegos que desea ingresar: ";
@@ -34,9 +34,9 @@ for ($numeroJuego=0; $numeroJuego<$cantidadJuegos; $numeroJuego++) {
    echo "¿que puntaje obtuvo O?";
    $juegosActuales[$numeroJuego]["Ptos O"] = trim(fgets(STDIN));
 };
+*/
 
-
-
+/*
 function seleccionarOpcion () {
    echo  "1) Jugar al tateti \n";
    echo  "2) Mostrar un juego \n ";
@@ -51,8 +51,10 @@ function seleccionarOpcion () {
    $opcionSeleccionada = solicitarNumeroEntre($minimo, $maximo);
    return $opcionSeleccionada;
 };
- 
+*/
 
+
+/*
 function primerJuegoGanado ($arregloJuegos, $ganadorBuscado){
 $largoArreglo = count ($arregloJuegos);
 $posicionArreglo = 0;
@@ -71,7 +73,7 @@ while ($posicionArreglo < $largoArreglo && $ganadorBuscado <> $ganadorPartida) {
 return $arregloJuegos[$posicionArreglo];
 
 };
-
+*/
 
 function elijaSimbolo () {
     $simboloElegido= "";
@@ -82,7 +84,7 @@ function elijaSimbolo () {
         else {
           echo "Por favor seleccione un Simbolo correcto: " ;};
         };
-};
+
 
 
 /**************************************/
