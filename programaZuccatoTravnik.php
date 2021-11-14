@@ -26,27 +26,9 @@ function cargarJuegos(&$arregloJuegos, $jugador1,$jugador2,$puntaje1,$puntaje2) 
     return $arregloJuegos;
 };
 
-/*
-function cargarJuegos(){
 
-echo "Elija la cantidad de juegos que desea ingresar: ";
-$cantidadJuegos = trim(fgets(STDIN));
 
-for ($numeroJuego=0; $numeroJuego<$cantidadJuegos; $numeroJuego++) {
-   echo "¿Que jugador jugo con X?";
-   $juegosActuales[$numeroJuego]["X"] = trim(fgets(STDIN));
-   echo "¿Que jugador jugo con O?";
-   $juegosActuales[$numeroJuego]["O"] = trim(fgets(STDIN));
-   echo "¿Como concluyo el juego? (Ganador/Empate)";
-   $juegosActuales[$numeroJuego]["resultado"] = trim(fgets(STDIN));
-   echo "¿que puntaje obtuvo X?";
-   $juegosActuales[$numeroJuego]["Ptos X"] = trim(fgets(STDIN));
-   echo "¿que puntaje obtuvo O?";
-   $juegosActuales[$numeroJuego]["Ptos O"] = trim(fgets(STDIN));
-};
-*/
 
-/*
 function seleccionarOpcion () {
    echo  "1) Jugar al tateti \n";
    echo  "2) Mostrar un juego \n ";
@@ -61,11 +43,11 @@ function seleccionarOpcion () {
    $opcionSeleccionada = solicitarNumeroEntre($minimo, $maximo);
    return $opcionSeleccionada;
 };
-*/
 
 
-/*
-function primerJuegoGanado ($arregloJuegos, $ganadorBuscado){
+
+
+function primerJuegoGanados ($arregloJuegos, $ganadorBuscado){
 $largoArreglo = count ($arregloJuegos);
 $posicionArreglo = 0;
 $ganadorPartida = "";
@@ -83,7 +65,7 @@ while ($posicionArreglo < $largoArreglo && $ganadorBuscado <> $ganadorPartida) {
 return $arregloJuegos[$posicionArreglo];
 
 };
-*/
+
 
 function primerJuegoGanado(&$arregloJuegos, $ganadorBuscado) {
     $ganadorEncontrado = FALSE;
@@ -182,24 +164,3 @@ switch ($opcionSeleccionada) {
 //imprimirResultado($juego);
 
 
-
-/*Proceso:
-echo "El historial de partidos esta vacio, inicie un historial:";
-  $historialJuegos = cargarJuegos();
-
-  $menu = seleccionarOpcion();
-  
-  switch ($opcionSeleccionada) {
-    case 1:
-        $juego = jugar();
-        /add all data to array/
-        break;
-    case 2:
-        echo "Seleccione el N° de juego que desea visualizar: ";
-        $juegoAVisualizar =trim(fgets(STDIN));
-        visualizarUnJuego($juegoAVisualizar); 
-        break;
-    case 3:
-        echo "i es igual a 2";
-        break;
-}; */
