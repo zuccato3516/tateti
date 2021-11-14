@@ -79,11 +79,15 @@ function elijaSimbolo () {
     $simboloElegido= "";
     echo "seleccione un Simbolo para jugar (X-O)";
     $simboloElegido = strtoupper(trim(fgets(STDIN)));
+    while ($simboloElegido <> "X" ||"O"){
+    
         if ($simboloElegido == 0){
            $simboloElegido = "O";}
         else {
           echo "Por favor seleccione un Simbolo correcto: " ;};
+          $simboloElegido = strtoupper(trim(fgets(STDIN)));
         };
+    }
 
 
 
@@ -151,6 +155,8 @@ $juegos[10]["puntosCruz"] = 3;
 $juegos[10]["puntosCirculo"] = 0;
 
 //Proceso:
+
+
 
 $juego = jugar();
 //print_r($juego);
