@@ -26,8 +26,10 @@ function cargarJuegos(&$arregloJuegos, $jugador1,$jugador2,$puntaje1,$puntaje2) 
     return $arregloJuegos;
 };
 
-
-
+function jugarJuego() {
+    $juego = jugar();
+    cargarJuegos($juegos,$juego["jugadorCruz"],$juego["jugadorCirculo"],$juego["puntosCruz"],$juego["puntosCirculo"]);
+}
 
 function seleccionarOpcion () {
    echo  "1) Jugar al tateti \n";
@@ -47,25 +49,16 @@ function seleccionarOpcion () {
 function primerJuegoGanado(&$arregloJuegos, $ganadorBuscado) {
     $ganadorEncontrado = FALSE;
     $i = 0;
-    while ($ganadorEncontrado == FALSE) {
-        if (($arregloJuegos[$i]["jugadorCruz"] = $ganadorBuscado && $arregloJuegos[$i]["puntosCruz">"puntosCirculo"])||($arregloJuegos[$i]["jugadorCirculo"] = $ganadorBuscado && $arregloJuegos[$i]["puntosCirculo">"puntosCruz"])){
-            return $i;
+    while ($ganadorEncontrado == FALSE && $i<count($arregloJuegos)) {
+        if (($arregloJuegos[$i]["jugadorCruz"] == $ganadorBuscado && $arregloJuegos[$i]["puntosCruz"]>$arregloJuegos[$i]["puntosCirculo"])||($arregloJuegos[$i]["jugadorCirculo"] == $ganadorBuscado && $arregloJuegos[$i]["puntosCirculo"]>$arregloJuegos[$i]["puntosCruz"])){
+            $ganadorEncontrado = TRUE;
         };
         $i = $i +1;
     };
-
-
-        if () {
-            $ganadorEncontrado = "jugadorCruz";
-        } elseif ($arregloJuegos[$i]["puntosCruz"<"puntosCirculo"]) {
-            $ganadorEncontrado = "jugadorCirculo";
-        };
-        $i = $i + 1;
-    };
     if ($ganadorEncontrado == FALSE) {
-        $ganadorEncontrado = -1;
-    };
-    return $ganadorEncontrado;
+        $i = 0;
+    }
+    return $i;
 }
 
 function elijaSimbolo () {
@@ -122,11 +115,7 @@ cargarJuegos($juegos,"Maria","Ana",3,0);
 
 //Proceso:
 
-$juego = jugar();
 
-cargarJuegos($juegos,$juego["jugadorCruz"],$juego["jugadorCirculo"],$juego["puntosCruz"],$juego["puntosCirculo"]);
-
-print_r($juegos);
 
 
 $historialJuegos = cargarJuegos();
@@ -148,9 +137,8 @@ switch ($opcionSeleccionada) {
       echo "Ingrese el nombre de un Jugador para ver su primer juego ganado:";
       $primerJuegoDeJugador =trim(fgets(STDIN));
       primerJuegoGanado ($primerJuegoDeJugador);
-
-     
       break;
+
 }; 
 //imprimirResultado($juego);
 
