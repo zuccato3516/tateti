@@ -26,19 +26,21 @@ function cargarJuegos(&$arregloJuegos, $jugador1,$jugador2,$puntaje1,$puntaje2) 
     return $arregloJuegos;
 };
 
-function jugarJuego() {
+function jugarJuego($arregloJuegos) {
     $juego = jugar();
-    cargarJuegos($juegos,$juego["jugadorCruz"],$juego["jugadorCirculo"],$juego["puntosCruz"],$juego["puntosCirculo"]);
+    cargarJuegos($arregloJuegos,$juego["jugadorCruz"],$juego["jugadorCirculo"],$juego["puntosCruz"],$juego["puntosCirculo"]);
+    return $arregloJuegos;
 }
 
 function seleccionarOpcion () {
+   echo  "\n";
    echo  "1) Jugar al tateti \n";
-   echo  "2) Mostrar un juego \n ";
+   echo  "2) Mostrar un juego \n";
    echo  "3) Mostrar el primer juego ganador \n";
    echo  "4) Mostrar porcentaje de Juegos ganados \n";
    echo  "5) Mostrar resumen de Jugador \n";
    echo  "6) Mostrar listado de juegos Ordenado por jugador O \n";
-   echo  "7) salir \n";
+   echo  "7) Salir \n";
    echo  "Seleccione una opcion del menu: \n";
    $minimo = 1 ;
    $maximo = 7 ; 
@@ -60,34 +62,54 @@ function primerJuegoGanado(&$arregloJuegos, $ganadorBuscado) {
     }
     return $i;
 }
+/*
+function elijaSimbolo () {
+    $simboloElegido= "";
+    echo "Seleccione el simbolo que desea utilizar (X-O)";
+    $simboloElegido = strtoupper(trim(fgets(STDIN)));
+    
+
+    while ($simboloElegido != "X" && $simboloElegido !="O"){
+    
+          echo "Por favor seleccione un Simbolo correcto: "; 
+          $simboloElegido = strtoupper(trim(fgets(STDIN)));
+        };
+return $simboloElegido;
+ };
+*/
 
 function elijaSimbolo () {
     $simboloElegido= "";
-    echo "seleccione un Simbolo para jugar (X-O)";
-    $simboloElegido = strtoupper(trim(fgets(STDIN)));
-    while ($simboloElegido <> "X" ||"O"){
+    echo "Seleccione el simbolo que desea utilizar (X-O)";
+    $simboloElegido = trim(fgets(STDIN));
+    $simboloElegido = strtoupper($simboloElegido);
+
+    while ($simboloElegido != "X" && $simboloElegido !="O"){
     
-        if ($simboloElegido == 0){
-           $simboloElegido = "O";}
-        else {
-          echo "Por favor seleccione un Simbolo correcto: " ;};
-          $simboloElegido = strtoupper(trim(fgets(STDIN)));
+          echo "Por favor seleccione un Simbolo correcto: ";
+          $simboloElegido = trim(fgets(STDIN));
+        
+          $simboloElegido = strtoupper($simboloElegido);
         };
-    };
+    
+    return $simboloElegido;
+
+};
 
 
     function visualizarUnJuego ($arregloJuegos,$juegoNumero){
     $statusJuego = "";
         if ($arregloJuegos[$juegoNumero]["puntosCruz"] == 1){
-           $statusJuego == "empate";}
+           $statusJuego = "empate";}
         elseif ( $arregloJuegos[$juegoNumero]["puntosCruz"] > $arregloJuegos[$juegoNumero]["puntosCirculo"] ){
-           $statusJuego == "gano X";}
+           $statusJuego = "gano X";}
         else {
-           $statusJuego == "gano O";}
-        echo "Juego TATETI:." .$juegoNumero."(".$statusJuego. ")". "\n";
-        echo "Jugador X:". $arregloJuegos[$juegoNumero]["jugadorCruz"] ."obtuvo". $arregloJuegos[$juegoNumero]["puntosCruz"]. "puntos\n";
-        echo "Jugador 0:". $arregloJuegos[$juegoNumero]["jugadorCirculo"]. "obtuvo". $arregloJuegos[$juegoNumero]["puntosCirculo"]. "puntos\n";
-
+           $statusJuego = "gano O";}
+        echo "******************************\n";
+        echo "Juego TATETI: " .$juegoNumero."(".$statusJuego. ")". "\n";
+        echo "Jugador X: ". strtoupper($arregloJuegos[$juegoNumero]["jugadorCruz"])." obtuvo " . $arregloJuegos[$juegoNumero]["puntosCruz"]. " puntos.\n";
+        echo "Jugador 0: ". strtoupper($arregloJuegos[$juegoNumero]["jugadorCirculo"]). " obtuvo ". $arregloJuegos[$juegoNumero]["puntosCirculo"]. " puntos.\n";
+        echo "******************************\n";
     };
 
     function juegosGanadosTotales ($arregloJuegos){
@@ -100,6 +122,72 @@ function elijaSimbolo () {
         return $cantJuegosGanados;
     };
 
+    function juegosGanadosPor ($arregloJuegos, $simbolo){
+        $cantJuegosGanadosPor = 0;
+        
+    
+        if  (strcmp($simbolo,"X")==0){
+          foreach ($arregloJuegos as &$value) {
+              if ($value["puntosCruz"] > 1){
+              $cantJuegosGanadosPor = $cantJuegosGanadosPor + 1;
+              }
+            }    
+        } 
+        else {
+          foreach ($arregloJuegos as &$value) {
+              if ($value["puntosCirculo"] > 1){
+             $cantJuegosGanadosPor = $cantJuegosGanadosPor + 1;
+            }
+          }
+        }
+        
+        return $cantJuegosGanadosPor;
+        echo $cantJuegosGanadosPor;
+        
+    };
+
+
+function resumenJugador($arrayDeJuegos, $jugadorAResumir) {
+    $puntosTotales= 0;
+    $juegosGanados= 0;
+    $juegosEmpatados = 0;
+    $juegosPerdidos = 0;
+
+    foreach ($arrayDeJuegos as &$value) {
+        if  (strcmp($value["jugadorCruz"],$jugadorAResumir)==0){  
+            if  ( $value["puntosCruz"]> 1){
+                $juegosGanados = $juegosGanados + 1;
+                $puntosTotales= $puntosTotales + $value["puntosCruz"];
+            }
+            elseif ( $value["puntosCruz"]== 1){
+                $juegosEmpatados= $juegosEmpatados+1;
+            } else {
+                $juegosPerdidos = $juegosPerdidos + 1;
+            }}
+        elseif  (strcmp($value["jugadorCirculo"],$jugadorAResumir)==0){
+            if  ( $value["puntosCirculo"]> 1){
+                $juegosGanados = $juegosGanados + 1;
+                $puntosTotales= $puntosTotales + $value["puntosCirculo"];
+            }
+            elseif ( $value["puntosCirculo"]== 1){
+                $juegosEmpatados= $juegosEmpatados+1;
+            } else {
+                $juegosPerdidos = $juegosPerdidos + 1;
+            }}
+        }
+    echo "******************************\n";
+    echo "Jugador: ".strtoupper($jugadorAResumir)."\n";
+    echo "Ganó: ".$juegosGanados." juegos.\n";
+    echo "Perdió: ".$juegosPerdidos." juegos.\n";
+    echo "Empató: ".$juegosEmpatados." juegos.\n";
+    echo "Total de puntos acumulados: ".$puntosTotales." puntos.\n";
+    echo "******************************\n";
+      }    
+
+
+        
+       
+        
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -127,10 +215,11 @@ cargarJuegos($juegos,"Maria","Ana",3,0);
 
 
 while (TRUE){
+    print_r($juegos);
     $menu = seleccionarOpcion();
 switch ($menu) {
     case 1:
-        jugarJuego();
+        jugarJuego($juegos);
         break;
     case 2:
         echo "Seleccione el N° de juego que desea visualizar: ";
@@ -140,16 +229,39 @@ switch ($menu) {
     case 3:
         echo "Ingrese el nombre de un Jugador para ver su primer juego ganado:";
         $primerJuegoDeJugador =trim(fgets(STDIN));
-        echo primerJuegoGanado ($juegos,$primerJuegoDeJugador);
+        $primerJuego = primerJuegoGanado($juegos,$primerJuegoDeJugador);
+        visualizarUnJuego($juegos,$primerJuego);
         break;
     case 4:
-        echo juegosGanadosTotales($juegos); 
-          //Mostrar porcentaje de juegos ganados
-          // son dos funciones, una para det total juegos ganados y otra total ganados segun X o O
+        //echo juegosGanadosTotales($juegos); 
+        //$juegosSimbolo=0;
+        $porcentajeJuegos= 0;
+        $simboloABuscar = elijaSimbolo();
+        //echo $simboloABuscar; 
+        $juegosT =juegosGanadosTotales($juegos);
+        $juegosSimbolo=  juegosGanadosPor($juegos, $simboloABuscar);
+        //echo $juegosSimbolo;
+        //echo " ".$juegosT;
+
+        $porcentajeJuegos= ($juegosSimbolo/$juegosT) *100;
+        //echo $porcentajeJuegos;
+        if ($simboloABuscar == "X"){
+           
+            echo " X gano el ". $porcentajeJuegos . " % de los juegos ganados" ;
+        }
+        else { 
+            
+            echo " O gano el ". $porcentajeJuegos . " % de los juegos ganados" ;
+        }
+        
          
           break;
     case 5:
           //Mostrar Resumen Jugador
+          echo "Por favor seleccione el nombre del juegador";
+          $nombreJugador = trim(fgets(STDIN));
+          resumenJugador($juegos,$nombreJugador);
+
           break;
     case 6:
           //mostrar listado de juegos ordenado por jugador O
@@ -157,4 +269,5 @@ switch ($menu) {
            break;  
     case 7: 
            exit();
-    };};    
+    };
+};    
