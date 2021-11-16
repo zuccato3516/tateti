@@ -33,6 +33,10 @@ function cargarJuegos(&$arregloJuegos, $jugador1,$jugador2,$puntaje1,$puntaje2) 
     return $arregloJuegos;
 };
 
+function jugarJuego(&$arregloJuegos) {
+    $juego = jugar();
+    cargarJuegos($arregloJuegos,$juego["jugadorCruz"],$juego["jugadorCirculo"],$juego["puntosCruz"],$juego["puntosCirculo"]);
+}
 
 /*Modifica la estructura de datos al agregarse un nuevo juego
 * @param array $arreglojuegos
@@ -114,7 +118,7 @@ function elijaSimbolo () {
 *@param int &juegoNumero
 */
 function visualizarUnJuego ($arregloJuegos,$juegoNumero){
-$statusJuego = "";
+    $statusJuego = "";
     //Determina el resultado del juego ingresado
      if ($arregloJuegos[$juegoNumero]["puntosCruz"] == 1){
            $statusJuego = "empate";}
@@ -173,17 +177,18 @@ function juegosGanadosPor ($arregloJuegos, $simbolo){
     };
 
 /*Genera el resumen de un jugador mostrando cuantos juegos gano, perdio y empato, y puntos totales
-*@param array $arrayDeJuegos
+*@param array $arregloJuegos
 *@param string $jugadorAResumir
 *
 */
-function resumenJugador($arrayDeJuegos, $jugadorAResumir) {
-    $puntosTotales= 0;
-    $juegosGanados= 0;
+function resumenJugador($arregloJuegos, $jugadorAResumir) {
+    $puntosTotales = 0;
+    $juegosGanados = 0;
     $juegosEmpatados = 0;
     $juegosPerdidos = 0;
+    $resultado = array();
     //recorre el array buscando info del jugador
-    foreach ($arrayDeJuegos as &$value) {
+    foreach ($arregloJuegos as &$value) {
         if  (strcmp($value["jugadorCruz"],$jugadorAResumir)==0){  
             // recopila datos del jugador jugando como X
             if  ( $value["puntosCruz"]> 1){
@@ -207,6 +212,24 @@ function resumenJugador($arrayDeJuegos, $jugadorAResumir) {
                 $juegosPerdidos = $juegosPerdidos + 1;
             }}
         }
+    
+    $resultado[0] = $jugadorAResumir;
+    $resultado[1] = $juegosGanados;
+    $resultado[2] = $juegosPerdidos;
+    $resultado[3] = $juegosEmpatados;
+    $resultado[4] = $puntosTotales;
+
+    return $resultado;
+      }    
+
+function mostrarResultado(&$arregloResultado) {
+
+    $jugadorAResumir = $arregloResultado[0];
+    $juegosGanados = $arregloResultado[1];
+    $juegosPerdidos = $arregloResultado[2];
+    $juegosEmpatados = $arregloResultado[3];
+    $puntosTotales = $arregloResultado[4];
+
     echo "******************************\n";
     echo "Jugador: ".strtoupper($jugadorAResumir)."\n";
     echo "Ganó: ".$juegosGanados." juegos.\n";
@@ -214,21 +237,19 @@ function resumenJugador($arrayDeJuegos, $jugadorAResumir) {
     echo "Empató: ".$juegosEmpatados." juegos.\n";
     echo "Total de puntos acumulados: ".$puntosTotales." puntos.\n";
     echo "******************************\n";
-      }    
+}
+
+function Comparador($ar1, $ar2) {
+    if ($ar1['jugadorCirculo']>$ar2['jugadorCirculo']){
+        return 1;}
+    else if ($ar1['jugadorCirculo']<$ar2['jugadorCirculo']){
+        return -1;}
+        else{
+    return 0;}
+}       
 
 function juegosEnOrdenO($arregloJuegos){
-    function Comparador($ar1, $ar2)
-    {
-        if ($ar1['jugadorCirculo']>$ar2['jugadorCirculo']){
-            return 1;}
-        else if ($ar1['jugadorCirculo']<$ar2['jugadorCirculo']){
-            return -1;}
-            else{
-        return 0;}
-    } 
-    
     uasort($arregloJuegos,"Comparador");
-    
     print_r($arregloJuegos);
 };
         
@@ -266,7 +287,6 @@ while (TRUE){
 switch ($menu) {
     case 1:
         jugarJuego($juegos);
-        //inmediatamente es necesario llamar a la funcion de guarda el juego en el array
         break;
     case 2:
         echo "Seleccione el N° de juego que desea visualizar: ";
@@ -302,7 +322,8 @@ switch ($menu) {
           //Mostrar Resumen Jugador
           echo "Por favor seleccione el nombre del juegador";
           $nombreJugador = trim(fgets(STDIN));
-          resumenJugador($juegos,$nombreJugador);
+          $resumen = resumenJugador($juegos,$nombreJugador);
+          mostrarResultado($resumen);
           break;
     case 6:
           juegosEnOrdenO($juegos); 
