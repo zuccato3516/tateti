@@ -216,7 +216,21 @@ function resumenJugador($arrayDeJuegos, $jugadorAResumir) {
     echo "******************************\n";
       }    
 
-
+function juegosEnOrdenO($arregloJuegos){
+    function Comparador($ar1, $ar2)
+    {
+        if ($ar1['jugadorCirculo']>$ar2['jugadorCirculo']){
+            return 1;}
+        else if ($ar1['jugadorCirculo']<$ar2['jugadorCirculo']){
+            return -1;}
+            else{
+        return 0;}
+    } 
+    
+    uasort($arregloJuegos,"Comparador");
+    
+    print_r($arregloJuegos);
+};
         
        
         
@@ -289,12 +303,10 @@ switch ($menu) {
           echo "Por favor seleccione el nombre del juegador";
           $nombreJugador = trim(fgets(STDIN));
           resumenJugador($juegos,$nombreJugador);
-
           break;
     case 6:
-          //mostrar listado de juegos ordenado por jugador O
-          // con UASORT Y PRINT_R
-           break;  
+          juegosEnOrdenO($juegos); 
+          break;  
     case 7: 
            exit();
     };
