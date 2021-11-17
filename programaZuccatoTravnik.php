@@ -25,8 +25,8 @@ include_once("tateti.php");
 */
 function cargarJuegos(&$arregloJuegos, $jugador1,$jugador2,$puntaje1,$puntaje2) {
     $i = count($arregloJuegos);
-    $arregloJuegos[($i)]["jugadorCruz"] = $jugador1;
-    $arregloJuegos[($i)]["jugadorCirculo"] = $jugador2;
+    $arregloJuegos[($i)]["jugadorCruz"] = strtoupper($jugador1);
+    $arregloJuegos[($i)]["jugadorCirculo"] = strtoupper($jugador2);
     $arregloJuegos[($i)]["puntosCruz"] = $puntaje1;
     $arregloJuegos[($i)]["puntosCirculo"] = $puntaje2;
 
@@ -187,9 +187,11 @@ function resumenJugador($arregloJuegos, $jugadorAResumir) {
     $juegosEmpatados = 0;
     $juegosPerdidos = 0;
     $resultado = array();
+    //print_r($arregloJuegos); 
     //recorre el array buscando info del jugador
     foreach ($arregloJuegos as &$value) {
         if  (strcmp($value["jugadorCruz"],$jugadorAResumir)==0){  
+            //(strcmp(strtoupper($value["jugadorCruz"]),$jugadorAResumir)==0){  
             // recopila datos del jugador jugando como X
             if  ( $value["puntosCruz"]> 1){
                 $juegosGanados = $juegosGanados + 1;
@@ -202,6 +204,7 @@ function resumenJugador($arregloJuegos, $jugadorAResumir) {
             }}
         elseif  (strcmp($value["jugadorCirculo"],$jugadorAResumir)==0){
             //recopila datos del jugador jugando como O
+            //(strcmp(strtoupper($value["jugadorCirculo"]),$jugadorAResumir)==0){
             if  ( $value["puntosCirculo"]> 1){
                 $juegosGanados = $juegosGanados + 1;
                 $puntosTotales= $puntosTotales + $value["puntosCirculo"];
@@ -282,7 +285,7 @@ cargarJuegos($juegos,"Maria","Ana",3,0);
 
 
 while (TRUE){
-    print_r($juegos);
+    //print_r($juegos);
     $menu = seleccionarOpcion();
 switch ($menu) {
     case 1:
@@ -320,8 +323,8 @@ switch ($menu) {
           break;
     case 5:
           //Mostrar Resumen Jugador
-          echo "Por favor seleccione el nombre del juegador";
-          $nombreJugador = trim(fgets(STDIN));
+          echo "Por favor seleccione el nombre del juegador: ";
+          $nombreJugador = strtoupper(trim(fgets(STDIN)));
           $resumen = resumenJugador($juegos,$nombreJugador);
           mostrarResultado($resumen);
           break;
