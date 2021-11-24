@@ -118,8 +118,8 @@ function elijaSimbolo () {
 function visualizarUnJuego ($arregloJuegos,$juegoNumero){
     $statusJuego = "";
 
-    if ($juegoNumero < 0) {
-        echo "-1";
+    if ($juegoNumero < 0 || $juegoNumero > count($arregloJuegos)||is_string($juegoNumero)) {
+        echo "-1"."\n";
     } else {
     //Determina el resultado del juego ingresado
      if ($arregloJuegos[$juegoNumero]["puntosCruz"] == 1){
@@ -252,12 +252,14 @@ function mostrarResultado(&$arregloResultado) {
 *
 */
 function comparador($ar1, $ar2) {
+    $salida = 0;
     if ($ar1['jugadorCirculo']>$ar2['jugadorCirculo']){
-        return 1;}
+        $salida = 1;}
     else if ($ar1['jugadorCirculo']<$ar2['jugadorCirculo']){
-        return -1;}
+        $salida =  -1;}
         else{
-    return 0;}
+            $salida = 0;}
+    return $salida;
 }       
 
 /* Esta función utiliza uasort para ordenar todos los arreglos de $arregloJuegos en orden alfabético
@@ -297,7 +299,7 @@ cargarJuegos($juegos,"Maria","Ana",3,0);
 
 //Proceso:
 while (TRUE){
-    //print_r($juegos);
+   
     $menu = seleccionarOpcion();
 switch ($menu) {
     case 1:
@@ -322,10 +324,10 @@ switch ($menu) {
         $porcentajeJuegos= ($juegosSimbolo/$juegosT) *100;
         
         if ($simboloABuscar == "X"){
-            echo " X gano el ". $porcentajeJuegos . " % de los juegos ganados" ;
+            echo " X gano el ". $porcentajeJuegos . " % de los juegos ganados"."\n" ;
         }
         else { 
-            echo " O gano el ". $porcentajeJuegos . " % de los juegos ganados" ;
+            echo " O gano el ". $porcentajeJuegos . " % de los juegos ganados"."\n" ;
         }
           break;
     case 5:
